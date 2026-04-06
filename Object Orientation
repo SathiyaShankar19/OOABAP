@@ -1,0 +1,49 @@
+Object Orientation
+Object Orientation ( OO ), or to be more precise, object-oriented programming, is a problem-solving method in which the software solution reflects objects in the real world.
+
+
+Definitions of Some object Oriented Concepts ( Terms ).
+Classes :
+-------------
+Class is a section of source code that contains data and provides services into a Single Unit.
+The data from the attributes and the services are known as methods.
+Encapsulation is supported through Classes.
+Global Class is an ABAP object which can be accessed via SAP Class Builder, T-code for SAP Class Builder is SE24.
+Local classes are classes that are available in ABAP programs, we can access them via ABAP editor SE38.
+
+Objects :
+------------
+From a technical point of view, objects are run-time instances of a class.
+We can create any number of objects based on a single class.
+Each instance(object) of a class has a unique identity and its own set of values for its attributes.
+Polymorphism :
+------------------
+Identical ( identically-named ) methods behave differently in different classes.
+object-oriented programming contains constructions called interfaces. They enable you to address methods with the same name in different objects.
+Although the form of address is always the same, the implementation of the method is specific to a particular class.
+Method overwriting: Same method name with the same signature can exist in 2 or more classes.
+Method overloading: Inside the class, 2 or more methods can have the same but different signatures.
+
+Inheritance :
+---------------
+We can use an existing class to drive a new class. Derived classes inherit the data and methods of the superclass.
+However, they can overwrite existing methods, and also add new ones.
+
+
+Encapsulation :
+-----------------------
+Objects restrict the visibility of their resources (attributes and methods ) to other users.
+Every object has an interface, which determines how other objects can interact with it.
+The implementation of the object is encapsulated, that is, invisible outside the object itself.
+
+
+Object-Oriented Approach - key features
+----------------------------------------
+Discover more
+Enterprise Resource Planning (ERP)
+Business & Productivity Software
+Better Programming Structure.
+Real-world entities can be modeled very well.
+Stress on data security and access.
+Reduction in code redundancy.
+Data encapsulation and abstraction.
