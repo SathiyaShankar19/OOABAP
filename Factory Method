@@ -1,0 +1,71 @@
+
+REPORT  zteam24_objects_23.
+
+* Types Declaration
+TYPES : BEGIN OF ty_mara,
+          matnr          TYPE matnr,
+          ernam          TYPE ernam,
+          mtart          TYPE mtart,
+          mbrsh          TYPE mbrsh,
+          matkl          TYPE matkl,
+          stat1          TYPE c,
+        END OF ty_mara.
+
+* Data Declaration
+DATA  : it_mara          TYPE TABLE OF ty_mara,
+        wa_mara          TYPE ty_mara,
+        matnr            TYPE matnr.
+
+* Reference Creation
+DATA : gr_alv            TYPE REF TO cl_salv_table,           "Basis Class for Simple Tables
+       gr_func           TYPE REF TO cl_salv_functions,       "Generic and Application-Specific Functions
+       gr_col            TYPE REF TO cl_salv_columns,         "All Column Objects
+       gr_column_list    TYPE REF TO cl_salv_column_list.     "Column Description for List-Type Tables
+
+* Input From User
+SELECT-OPTIONS : so_matnr FOR matnr.
+
+* Program Starts
+START-OF-SELECTION.
+
+  SELECT matnr
+         ernam
+         mtart
+         mbrsh
+         matkl
+         FROM mara
+         INTO CORRESPONDING FIELDS OF TABLE it_mara
+         WHERE matnr IN so_matnr.
+
+  IF sy-subrc EQ 0.
+* Call the Factory Method
+    CALL METHOD cl_salv_table=>factory
+      IMPORTING
+        r_salv_table = gr_alv
+      CHANGING
+        t_table      = it_mara.
+  ENDIF.
+
+*  factory methods are used if groups of classes have to be instantiated at the same time
+
+* To Display the Application Tool bar in the Report
+  gr_func = gr_alv->get_functions( ).
+  gr_func->set_all( abap_true ).
+
+* Get Columns details
+  gr_col = gr_alv->get_columns( ).
+
+* set Columns Optimization
+  gr_col->set_optimize( 'X' ).
+
+* Process Individual Columns to display as Checkbox
+  gr_column_list ?= gr_col->get_column( 'STAT1' ).
+  gr_column_list->set_cell_type( if_salv_c_cell_type=>checkbox ).
+  gr_column_list->set_output_length( 10 ).
+
+* Using Object call the Display method to display the Report
+  gr_alv->display( ).
+
+
+***************************** Program Ends ****************************
+***************************** Code Ends *******************************
